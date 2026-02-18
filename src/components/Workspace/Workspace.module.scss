@@ -1,0 +1,9 @@
+.workspace {
+  position: relative;
+  width: 100%;
+  height: 500px; // фиксированная высота для наглядности, позже можно сделать резиновой
+  background-color: #ecf0f1;
+  border: 2px dashed #bdc3c7;
+  border-radius: 8px;
+  overflow: hidden; // чтобы объекты не выходили за границы
+}

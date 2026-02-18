@@ -1,0 +1,35 @@
+.object {
+  position: absolute;
+  transform: translate(-50%, -50%); // центрируем по заданным координатам
+  padding: 8px 12px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  will-change: transform;
+
+  // Статус active
+  &.status-active {
+    background-color: #2ecc71;
+  }
+
+  // Статус inactive
+  &.status-inactive {
+    background-color: #95a5a6;
+  }
+
+  // Статус disabled
+  &.status-disabled {
+    background-color: #7f8c8d;
+    opacity: 0.6;
+    // cursor: not-allowed;  // удалено
+  }
+
+  &.selected {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 0 0 3px #f1c40f, 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 10;
+  }
+}
