@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import type { Store, WorkspaceObject, ObjectStatus } from '../types';
-import { mockObjects } from '../data/mockObjects';
+import { create } from "zustand"
+import type { Store } from "../types"
+import { mockObjects } from "../data/mockObjects"
 
 export const useStore = create<Store>((set) => ({
   objects: mockObjects,
@@ -9,13 +9,13 @@ export const useStore = create<Store>((set) => ({
   updateObjectStatus: (id, newStatus) =>
     set((state) => ({
       objects: state.objects.map((obj) =>
-        obj.id === id ? { ...obj, status: newStatus } : obj
+        obj.id === id ? { ...obj, status: newStatus } : obj,
       ),
     })),
   updateObjectPosition: (id, x, y) =>
     set((state) => ({
       objects: state.objects.map((obj) =>
-        obj.id === id ? { ...obj, x, y } : obj
+        obj.id === id ? { ...obj, x, y } : obj,
       ),
     })),
-}));
+}))
