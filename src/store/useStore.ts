@@ -1,13 +1,20 @@
 import { create } from "zustand"
 import type { Store } from "../types"
 import { mockObjects } from "../data/mockObjects"
+import { loadObjectsFromStorage } from "../utils/storage"
+
+// Загружаем из localStorage или используем моки
+const initialObjects = loadObjectsFromStorage() || mockObjects
 
 export const useStore = create<Store>((set) => ({
-  objects: mockObjects,
+  objects: initialObjects,
+
+  resetObjects: () => set({ objects: mockObjects }),
 
   selectObject: (id) =>
     set((state) => {
-      // Снять выделение (id === null или клик на тот же объект)
+      // ... (логика без изменений)
+      // Не трогаем объекты, только выделение, поэтому сохранение не требуется
       if (id === null) {
         return {
           objects: state.objects.map((obj) =>
@@ -15,14 +22,9 @@ export const useStore = create<Store>((set) => ({
           ),
         }
       }
-
       const target = state.objects.find((obj) => obj.id === id)
       if (!target) return state
-
-      // Игнорируем клик по disabled
       if (target.status === "disabled") return state
-
-      // Если кликнули на активный – снимаем выделение
       if (target.status === "active") {
         return {
           objects: state.objects.map((obj) =>
@@ -30,8 +32,6 @@ export const useStore = create<Store>((set) => ({
           ),
         }
       }
-
-      // Иначе (клик на inactive) – делаем его активным, предыдущий активный сбрасываем
       return {
         objects: state.objects.map((obj) => {
           if (obj.status === "active") {

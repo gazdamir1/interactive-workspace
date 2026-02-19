@@ -13,4 +13,5 @@ export interface Store {
   selectObject: (id: string | null) => void // выделение/снятие (меняет статус)
   updateObjectStatus: (id: string, newStatus: ObjectStatus) => void
   updateObjectPosition: (id: string, x: number, y: number) => void
+  resetObjects: () => void
 }
