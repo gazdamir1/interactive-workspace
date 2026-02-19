@@ -1,35 +1,41 @@
 .object {
   position: absolute;
-  transform: translate(-50%, -50%); // центрируем по заданным координатам
+  transform: translate(-50%, -50%);
   padding: 8px 12px;
-  background-color: #3498db;
   color: white;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: move;
   user-select: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
   will-change: transform;
+  z-index: 1;
 
-  // Статус active
   &.status-active {
-    background-color: #2ecc71;
+    background-color: #2ecc71; // зелёный для активного
   }
 
-  // Статус inactive
   &.status-inactive {
-    background-color: #95a5a6;
+    background-color: #95a5a6; // серый для неактивного доступного
   }
 
-  // Статус disabled
   &.status-disabled {
-    background-color: #7f8c8d;
+    background-color: #7f8c8d; // тёмно-серый для заблокированного
     opacity: 0.6;
-    // cursor: not-allowed;  // удалено
+    cursor: default;
   }
 
   &.selected {
     transform: translate(-50%, -50%) scale(1.1);
-    box-shadow: 0 0 0 3px #f1c40f, 0 4px 8px rgba(0,0,0,0.3);
-    z-index: 10;
+    box-shadow:
+      0 0 0 3px #f1c40f,
+      0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover:not(.status-disabled) {
+    opacity: 0.9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 }

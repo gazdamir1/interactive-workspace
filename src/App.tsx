@@ -1,6 +1,6 @@
-import { Workspace } from './components/Workspace/Workspace';
-import { InfoPanel } from './components/InfoPanel/InfoPanel';
-import styles from './App.module.scss';
+import { Workspace } from "./components/Workspace/Workspace"
+import { InfoPanel } from "./components/InfoPanel/InfoPanel"
+import styles from "./App.module.scss"
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Workspace />
       <InfoPanel />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

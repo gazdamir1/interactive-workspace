@@ -6,51 +6,28 @@ import { WorkspaceContext } from "../../context/WorkspaceContext"
 
 interface ObjectItemProps {
   object: WorkspaceObject
-  isSelected: boolean
   onClick: () => void
 }
 
-export const ObjectItem: React.FC<ObjectItemProps> = ({
-  object,
-  isSelected,
-  onClick,
-}) => {
+export const ObjectItem: React.FC<ObjectItemProps> = ({ object, onClick }) => {
   const updateObjectPosition = useStore((state) => state.updateObjectPosition)
   const [isDragging, setIsDragging] = useState(false)
   const workspaceContext = useContext(WorkspaceContext)
 
-  console.log(
-    "ObjectItem render:",
-    object.id,
-    workspaceContext?.workspaceRef.current,
-  ) // Отладка
-
   const handleMouseDown = (e: React.MouseEvent) => {
-    console.log("Mouse down on object:", object.id) // Отладка
-
     e.stopPropagation()
     e.preventDefault()
 
-    if (object.status === "disabled") {
-      console.log("Object is disabled, no drag")
-      return
-    }
+    if (object.status === "disabled") return // disabled нельзя перемещать
 
     const workspaceElement = workspaceContext?.workspaceRef.current
-    console.log("Workspace element:", workspaceElement) // Отладка
-
-    if (!workspaceElement) {
-      console.log("No workspace element found")
-      return
-    }
+    if (!workspaceElement) return
 
     const startX = e.clientX
     const startY = e.clientY
     const initialX = object.x
     const initialY = object.y
     const rect = workspaceElement.getBoundingClientRect()
-
-    console.log("Start drag:", { startX, startY, initialX, initialY, rect })
 
     const onMouseMove = (moveEvent: MouseEvent) => {
       moveEvent.preventDefault()
@@ -61,14 +38,11 @@ export const ObjectItem: React.FC<ObjectItemProps> = ({
       const newX = Math.min(100, Math.max(0, initialX + deltaX))
       const newY = Math.min(100, Math.max(0, initialY + deltaY))
 
-      console.log("Moving:", { newX, newY }) // Отладка
-
       updateObjectPosition(object.id, newX, newY)
       setIsDragging(true)
     }
 
     const onMouseUp = () => {
-      console.log("Mouse up, isDragging:", isDragging) // Отладка
       document.removeEventListener("mousemove", onMouseMove)
       document.removeEventListener("mouseup", onMouseUp)
       setTimeout(() => setIsDragging(false), 0)
@@ -79,7 +53,6 @@ export const ObjectItem: React.FC<ObjectItemProps> = ({
   }
 
   const handleClick = () => {
-    console.log("Click, isDragging:", isDragging) // Отладка
     if (!isDragging) {
       onClick()
     }
@@ -88,7 +61,7 @@ export const ObjectItem: React.FC<ObjectItemProps> = ({
   const itemClasses = [
     styles.object,
     styles[`status-${object.status}`],
-    isSelected ? styles.selected : "",
+    object.status === "active" ? styles.selected : "",
   ].join(" ")
 
   return (
