@@ -3,9 +3,38 @@
   margin: 0 auto;
   padding: 20px;
   font-family: sans-serif;
+  padding-left: 28px;
 }
 
 body {
   margin: 0;
   overflow-x: hidden;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html::-webkit-scrollbar {
+  width: 8px; /* ширина полосы */
+  background: transparent; /* фон прозрачный */
+}
+
+html::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2); /* полупрозрачный ползунок */
+  border-radius: 4px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5); /* при наведении становится темнее */
+}
+
+.content {
+  padding-left: var(--scrollbar-width);
+}
+
+h1 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  transition: font-size ease;
+  text-align: center;
 }

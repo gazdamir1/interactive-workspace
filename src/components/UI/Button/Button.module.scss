@@ -9,6 +9,11 @@
   margin-right: 8px;
   transition: background-color 0.2s;
 
+  white-space: nowrap; // запрещает перенос текста
+  overflow: hidden; // скрывает выходящий за пределы контент
+  text-overflow: ellipsis; // добавляет многоточие, если текст не помещается
+  max-width: 100%; // ограничивает ширину рамками родителя
+
   &:hover {
     background-color: #2980b9;
   }

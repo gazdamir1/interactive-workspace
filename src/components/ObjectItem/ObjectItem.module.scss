@@ -13,6 +13,11 @@
   will-change: transform;
   z-index: 1;
 
+  white-space: nowrap; // запрет переноса
+  overflow: hidden; // обрезка выходящего текста
+  text-overflow: ellipsis; // многоточие в конце
+  max-width: 100%;
+
   &.status-active {
     background-color: #2ecc71; // зелёный для активного
   }
