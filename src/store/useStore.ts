@@ -3,7 +3,6 @@ import type { Store } from "../types"
 import { mockObjects } from "../data/mockObjects"
 import { loadObjectsFromStorage } from "../utils/storage"
 
-// Загружаем из localStorage или используем моки
 const initialObjects = loadObjectsFromStorage() || mockObjects
 
 export const useStore = create<Store>((set) => ({
@@ -61,7 +60,7 @@ export const useStore = create<Store>((set) => ({
     set((state) => ({
       objects: state.objects.map((obj) => ({
         ...obj,
-        x: Math.random() * 100, // случайное число от 0 до 100
+        x: Math.random() * 100,
         y: Math.random() * 100,
       })),
     })),

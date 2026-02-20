@@ -9,11 +9,10 @@ export default defineConfig({
     setupFiles: "./src/test/setup.ts",
     css: true,
     coverage: {
-      provider: "v8", // или 'istanbul'
-      reporter: ["text", "html", "clover", "json"], // форматы отчётов
-      reportsDirectory: "./coverage", // папка для отчётов
+      provider: "v8",
+      reporter: ["text", "html", "clover", "json"],
+      reportsDirectory: "./coverage",
       exclude: [
-        // что исключить из покрытия
         "node_modules/",
         "src/test/**",
         "**/*.d.ts",

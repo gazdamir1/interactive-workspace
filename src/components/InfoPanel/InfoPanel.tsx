@@ -9,7 +9,7 @@ export const InfoPanel: React.FC = () => {
   const activeObject = objects.find((obj) => obj.status === "active")
 
   const handleClose = () => {
-    selectObject(null) // active -> inactive (панель закрывается)
+    selectObject(null)
   }
 
   const handleToggleBlock = () => {
@@ -17,13 +17,12 @@ export const InfoPanel: React.FC = () => {
 
     let newStatus: ObjectStatus
     if (activeObject.status === "disabled") {
-      newStatus = "inactive" // разблокировка
+      newStatus = "inactive"
     } else {
-      newStatus = "disabled" // блокировка (active или inactive -> disabled)
+      newStatus = "disabled"
     }
 
     updateObjectStatus(activeObject.id, newStatus)
-    // После изменения статуса объект перестаёт быть active, панель закроется автоматически
   }
 
   return (

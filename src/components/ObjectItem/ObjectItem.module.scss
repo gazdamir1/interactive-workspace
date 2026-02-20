@@ -13,23 +13,23 @@
   will-change: transform;
   z-index: 1;
 
-  white-space: nowrap; // запрет переноса
-  overflow: hidden; // обрезка выходящего текста
-  text-overflow: ellipsis; // многоточие в конце
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   max-width: 100%;
 
   touch-action: none;
 
   &.status-active {
-    background-color: #2ecc71; // зелёный для активного
+    background-color: #2ecc71;
   }
 
   &.status-inactive {
-    background-color: #95a5a6; // серый для неактивного доступного
+    background-color: #95a5a6;
   }
 
   &.status-disabled {
-    background-color: #7f8c8d; // тёмно-серый для заблокированного
+    background-color: #7f8c8d;
     opacity: 0.6;
     cursor: default;
   }

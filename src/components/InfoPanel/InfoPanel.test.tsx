@@ -4,7 +4,7 @@ import { InfoPanel } from "./InfoPanel"
 import { useStore } from "../../store/useStore"
 import { describe, it, expect, vi, beforeEach } from "vitest"
 import type { WorkspaceObject, Store } from "../../types"
-import styles from "./InfoPanel.module.scss" // импорт стилей для доступа к сгенерированным классам
+import styles from "./InfoPanel.module.scss"
 
 vi.mock("../../store/useStore", () => ({
   useStore: vi.fn(),
@@ -42,7 +42,6 @@ describe("InfoPanel", () => {
     mockUseStore.mockReturnValue(mockStore)
     render(<InfoPanel />)
     const panel = screen.getByText("Информация об объекте").parentElement
-    // Проверяем наличие класса из CSS-модуля
     expect(panel).toHaveClass(styles.visible)
   })
 
@@ -66,7 +65,6 @@ describe("InfoPanel", () => {
     } as unknown as Store
     mockUseStore.mockReturnValue(mockStore)
     render(<InfoPanel />)
-    // Функция-матчер для поиска текста внутри элементов
     expect(
       screen.getByText((content) => content.includes("Active Object")),
     ).toBeInTheDocument()

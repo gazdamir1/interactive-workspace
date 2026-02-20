@@ -4,7 +4,6 @@ import { mockObjects } from "../data/mockObjects"
 
 describe("useStore", () => {
   beforeEach(() => {
-    // Сброс стора к начальному состоянию перед каждым тестом
     useStore.setState({
       objects: mockObjects,
     })
@@ -21,7 +20,6 @@ describe("useStore", () => {
     const { objects } = useStore.getState()
     const activeObj = objects.find((obj) => obj.id === "1")
     expect(activeObj?.status).toBe("active")
-    // Проверяем, что другие не стали активными
     const otherActive = objects.filter(
       (obj) => obj.status === "active" && obj.id !== "1",
     )
@@ -30,8 +28,8 @@ describe("useStore", () => {
 
   it("should deselect active object on click again", () => {
     const { selectObject } = useStore.getState()
-    selectObject("1") // активируем
-    selectObject("1") // деактивируем
+    selectObject("1")
+    selectObject("1")
     const { objects } = useStore.getState()
     const obj = objects.find((o) => o.id === "1")
     expect(obj?.status).toBe("inactive")
@@ -39,11 +37,10 @@ describe("useStore", () => {
 
   it("should not select disabled object", () => {
     const { selectObject } = useStore.getState()
-    selectObject("3") // объект с id 3 - disabled
+    selectObject("3")
     const { objects } = useStore.getState()
     const obj = objects.find((o) => o.id === "3")
-    expect(obj?.status).toBe("disabled") // статус не изменился
-    // Никто не активен
+    expect(obj?.status).toBe("disabled")
     expect(objects.some((o) => o.status === "active")).toBe(false)
   })
 
@@ -63,7 +60,7 @@ describe("useStore", () => {
 
   it("should reset objects to mock", () => {
     const { resetObjects, updateObjectPosition } = useStore.getState()
-    updateObjectPosition("1", 99, 99) // меняем позицию
+    updateObjectPosition("1", 99, 99)
     resetObjects()
     const { objects } = useStore.getState()
     expect(objects).toEqual(mockObjects)
@@ -74,7 +71,6 @@ describe("useStore", () => {
     const before = useStore.getState().objects.map((o) => ({ x: o.x, y: o.y }))
     randomizePositions()
     const after = useStore.getState().objects.map((o) => ({ x: o.x, y: o.y }))
-    // Проверяем, что хотя бы одна позиция изменилась (с учётом случайности может не измениться, но вероятность мала)
     expect(before).not.toEqual(after)
   })
 })

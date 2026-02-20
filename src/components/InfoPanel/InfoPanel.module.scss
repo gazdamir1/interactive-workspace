@@ -25,10 +25,9 @@
   @media (max-width: 768px) {
     .panel {
       width: 90%;
-      max-width: 300px; /* или auto */
+      max-width: 300px;
       right: 5%;
       font-size: 14px;
-      /* оставить top: 20px; без изменения bottom/left */
     }
   }
 }

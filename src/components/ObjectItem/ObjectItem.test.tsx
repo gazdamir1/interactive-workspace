@@ -31,7 +31,6 @@ const mockObject = {
 
 const mockWorkspaceRef = { current: document.createElement("div") }
 
-// Один раз определяем getBoundingClientRect
 Object.defineProperty(mockWorkspaceRef.current, "getBoundingClientRect", {
   value: () => ({
     width: 1000,
@@ -96,7 +95,6 @@ describe("ObjectItem", () => {
     await user.pointer({ keys: "[/MouseLeft]" })
 
     expect(updateObjectPosition).toHaveBeenCalledTimes(1)
-    // Проверяем, что функция вызвана с правильным id
     expect(updateObjectPosition).toHaveBeenCalledWith(
       "1",
       expect.any(Number),
@@ -184,10 +182,7 @@ describe("ObjectItem", () => {
     await user.pointer({ keys: "[MouseLeft>]", target: element })
     await user.pointer({ coords: { x: 600, y: 500 } })
     await user.pointer({ keys: "[/MouseLeft]" })
-
-    // Ждём, пока setTimeout сбросит флаг
     await new Promise((r) => setTimeout(r, 10))
-
     await user.click(element)
     expect(handleClick).toHaveBeenCalledTimes(1)
   })

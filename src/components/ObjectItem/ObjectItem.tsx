@@ -18,7 +18,7 @@ export const ObjectItem: React.FC<ObjectItemProps> = ({ object, onClick }) => {
     e.stopPropagation()
     e.preventDefault()
 
-    if (object.status === "disabled") return // disabled нельзя перемещать
+    if (object.status === "disabled") return
 
     const workspaceElement = workspaceContext?.workspaceRef.current
     if (!workspaceElement) return
@@ -89,7 +89,6 @@ export const ObjectItem: React.FC<ObjectItemProps> = ({ object, onClick }) => {
   }
 
   const handleClick = () => {
-    // Не вызываем onClick, если объект disabled или идёт перетаскивание
     if (!isDragging && object.status !== "disabled") {
       onClick()
     }

@@ -10,7 +10,6 @@ function App() {
   const resetObjects = useStore((state) => state.resetObjects)
   const randomizePositions = useStore((state) => state.randomizePositions)
 
-  // Сохраняем объекты в localStorage при каждом изменении
   useEffect(() => {
     saveObjectsToStorage(objects)
   }, [objects])
@@ -18,7 +17,7 @@ function App() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       randomizePositions()
-    }, 10000) // 10 секунд
+    }, 10000)
 
     return () => clearInterval(intervalId)
   }, [randomizePositions])
