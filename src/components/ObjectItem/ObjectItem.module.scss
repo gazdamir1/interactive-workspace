@@ -18,6 +18,8 @@
   text-overflow: ellipsis; // многоточие в конце
   max-width: 100%;
 
+  touch-action: none;
+
   &.status-active {
     background-color: #2ecc71; // зелёный для активного
   }

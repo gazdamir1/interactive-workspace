@@ -52,6 +52,42 @@ export const ObjectItem: React.FC<ObjectItemProps> = ({ object, onClick }) => {
     document.addEventListener("mouseup", onMouseUp)
   }
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.stopPropagation()
+
+    if (object.status === "disabled") return
+
+    const workspaceElement = workspaceContext?.workspaceRef.current
+    if (!workspaceElement) return
+
+    const touch = e.touches[0]
+    const startX = touch.clientX
+    const startY = touch.clientY
+    const initialX = object.x
+    const initialY = object.y
+    const rect = workspaceElement.getBoundingClientRect()
+
+    const onTouchMove = (moveEvent: TouchEvent) => {
+      moveEvent.preventDefault()
+      const touchMove = moveEvent.touches[0]
+      const deltaX = ((touchMove.clientX - startX) / rect.width) * 100
+      const deltaY = ((touchMove.clientY - startY) / rect.height) * 100
+      const newX = Math.min(100, Math.max(0, initialX + deltaX))
+      const newY = Math.min(100, Math.max(0, initialY + deltaY))
+      updateObjectPosition(object.id, newX, newY)
+      setIsDragging(true)
+    }
+
+    const onTouchEnd = () => {
+      document.removeEventListener("touchmove", onTouchMove)
+      document.removeEventListener("touchend", onTouchEnd)
+      setTimeout(() => setIsDragging(false), 0)
+    }
+
+    document.addEventListener("touchmove", onTouchMove, { passive: false })
+    document.addEventListener("touchend", onTouchEnd)
+  }
+
   const handleClick = () => {
     if (!isDragging) {
       onClick()
@@ -75,6 +111,7 @@ export const ObjectItem: React.FC<ObjectItemProps> = ({ object, onClick }) => {
       }}
       onMouseDown={handleMouseDown}
       onClick={handleClick}
+      onTouchStart={handleTouchStart}
     >
       <span>{object.name}</span>
     </div>
