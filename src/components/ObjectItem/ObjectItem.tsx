@@ -89,7 +89,8 @@ export const ObjectItem: React.FC<ObjectItemProps> = ({ object, onClick }) => {
   }
 
   const handleClick = () => {
-    if (!isDragging) {
+    // Не вызываем onClick, если объект disabled или идёт перетаскивание
+    if (!isDragging && object.status !== "disabled") {
       onClick()
     }
   }
@@ -112,6 +113,7 @@ export const ObjectItem: React.FC<ObjectItemProps> = ({ object, onClick }) => {
       onMouseDown={handleMouseDown}
       onClick={handleClick}
       onTouchStart={handleTouchStart}
+      data-testid="object-item"
     >
       <span>{object.name}</span>
     </div>
