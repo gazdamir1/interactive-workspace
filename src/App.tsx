@@ -8,11 +8,20 @@ import styles from "./App.module.scss"
 function App() {
   const objects = useStore((state) => state.objects)
   const resetObjects = useStore((state) => state.resetObjects)
+  const randomizePositions = useStore((state) => state.randomizePositions)
 
   // Сохраняем объекты в localStorage при каждом изменении
   useEffect(() => {
     saveObjectsToStorage(objects)
   }, [objects])
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      randomizePositions()
+    }, 10000) // 10 секунд
+
+    return () => clearInterval(intervalId)
+  }, [randomizePositions])
 
   return (
     <div className={styles.app}>

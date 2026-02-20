@@ -13,8 +13,6 @@ export const useStore = create<Store>((set) => ({
 
   selectObject: (id) =>
     set((state) => {
-      // ... (логика без изменений)
-      // Не трогаем объекты, только выделение, поэтому сохранение не требуется
       if (id === null) {
         return {
           objects: state.objects.map((obj) =>
@@ -57,5 +55,14 @@ export const useStore = create<Store>((set) => ({
       objects: state.objects.map((obj) =>
         obj.id === id ? { ...obj, x, y } : obj,
       ),
+    })),
+
+  randomizePositions: () =>
+    set((state) => ({
+      objects: state.objects.map((obj) => ({
+        ...obj,
+        x: Math.random() * 100, // случайное число от 0 до 100
+        y: Math.random() * 100,
+      })),
     })),
 }))

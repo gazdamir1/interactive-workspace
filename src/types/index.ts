@@ -14,4 +14,5 @@ export interface Store {
   updateObjectStatus: (id: string, newStatus: ObjectStatus) => void
   updateObjectPosition: (id: string, x: number, y: number) => void
   resetObjects: () => void
+  randomizePositions: () => void
 }
